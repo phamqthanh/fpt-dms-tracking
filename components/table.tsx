@@ -15,7 +15,7 @@ export default async function Table() {
       },
     },
     orderBy: {
-      createdAt: 'desc',
+      createdAt: "desc",
     },
   });
   const duration = Date.now() - startTime;
@@ -31,11 +31,9 @@ export default async function Table() {
         </div>
         <RefreshButton />
       </div>
-      
+
       {locations.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          No locations tracked yet
-        </div>
+        <div className="text-center py-8 text-gray-500">No locations tracked yet</div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -46,6 +44,11 @@ export default async function Table() {
                 <th className="pb-3 text-sm font-semibold">Coordinates</th>
                 <th className="pb-3 text-sm font-semibold">Time</th>
                 <th className="pb-3 text-sm font-semibold">Map</th>
+                <th className="pb-3 text-sm font-semibold">Device Name</th>
+                <th className="pb-3 text-sm font-semibold">Brand</th>
+                <th className="pb-3 text-sm font-semibold">Model ID</th>
+                <th className="pb-3 text-sm font-semibold">Model Name</th>
+                <th className="pb-3 text-sm font-semibold">Total Memory</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-900/5">
@@ -80,27 +83,46 @@ export default async function Table() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
                     >
-                      <svg 
-                        className="w-4 h-4" 
-                        fill="none" 
-                        stroke="currentColor" 
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2} 
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" 
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                         />
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2} 
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" 
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                         />
                       </svg>
                       View on Map
                     </a>
+                  </td>
+                  <td className="py-4">
+                    <p className="text-sm text-gray-700">{location.deviceName || "N/A"}</p>
+                  </td>
+                  <td className="py-4">
+                    <p className="text-sm text-gray-700">{location.brand || "N/A"}</p>
+                  </td>
+                  <td className="py-4">
+                    <p className="text-sm text-gray-700">{location.modelId || "N/A"}</p>
+                  </td>
+                  <td className="py-4">
+                    <p className="text-sm text-gray-700">{location.modelName || "N/A"}</p>
+                  </td>
+                  <td className="py-4">
+                    <p className="text-sm text-gray-700">
+                      {location.totalMemory
+                        ? `${(location.totalMemory / 1024 ** 3).toFixed(2)} GB`
+                        : "N/A"}
+                    </p>
                   </td>
                 </tr>
               ))}

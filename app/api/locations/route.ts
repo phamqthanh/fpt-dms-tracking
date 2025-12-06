@@ -71,9 +71,8 @@ export async function POST(request: NextRequest) {
       preferred_username: name,
       email,
     }: AuthPayload = parseJwt(apiToken || "").payload;
-    console.log(fId, name, email);
 
-    const { latitude, longitude } = body;
+    const { latitude, longitude, deviceName, brand, modelId, modelName, totalMemory } = body;
     // Validate required fields
     if (!name || latitude === undefined || longitude === undefined) {
       return NextResponse.json(
@@ -110,6 +109,11 @@ export async function POST(request: NextRequest) {
         latitude: parseFloat(latitude),
         longitude: parseFloat(longitude),
         userId: finalUserId || null,
+        deviceName,
+        brand,
+        modelId,
+        modelName,
+        totalMemory,
       },
       include: {
         user: {
