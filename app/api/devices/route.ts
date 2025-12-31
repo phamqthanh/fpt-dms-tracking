@@ -19,6 +19,7 @@ export const POST = createEndpoint(async (request) => {
       modelId: body.modelId,
       modelName: body.modelName,
       id: deviceId,
+      totalMemory: body.totalMemory,
     },
   });
 
