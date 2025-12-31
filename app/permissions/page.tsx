@@ -3,9 +3,7 @@ import permissionMatrix from "@/src/constants/permission-matrix.json";
 import { ChangeEventHandler, useEffect, useMemo, useReducer, useState } from "react";
 
 export default function UsersPage() {
-  const [checkedSet] = useState(
-    () => new Set<string>(JSON.parse(localStorage.getItem("permissions") || "[]"))
-  );
+  const [checkedSet] = useState(() => new Set<string>());
   const [flag, rerender] = useReducer((x) => x + 1, 0);
   const permissions = useMemo(() => {
     const permissions = new Set(
