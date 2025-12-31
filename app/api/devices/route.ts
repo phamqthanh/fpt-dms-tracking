@@ -1,8 +1,17 @@
 import prisma from "@/lib/prisma";
 import { createEndpoint } from "@/src/server/services/auth";
 
-export const POST = createEndpoint(async (request) => {
-  const body = await request.json();
+export const POST = createEndpoint<
+  unknown,
+  {
+    deviceId: string;
+    brand: string;
+    deviceName: string;
+    modelId: string;
+    modelName: string;
+    totalMemory: number;
+  }
+>(async (request, res, { body }) => {
   const { deviceId } = body;
   if (!deviceId)
     return {

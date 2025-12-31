@@ -37,9 +37,7 @@ export const GET = createEndpoint<{ limit: number; offset: number }>(async funct
 false);
 
 // POST: Tạo location mới
-export const POST = createEndpoint(async function (request: NextRequest) {
-  const body = await request.json();
-
+export const POST = createEndpoint<any, any>(async function (request, res, { body }) {
   const apiToken = request.headers.get("Authorization")?.replace("Bearer ", "");
   const { latitude, longitude, deviceId } = body;
   // Validate required fields
