@@ -8,7 +8,7 @@ export default async function UserTable() {
     include: {
       locations: {
         orderBy: {
-          createdAt: 'desc',
+          createdAt: "desc",
         },
         take: 1, // Lấy location gần nhất
       },
@@ -17,7 +17,7 @@ export default async function UserTable() {
       },
     },
     orderBy: {
-      createdAt: 'desc',
+      createdAt: "desc",
     },
   });
   const duration = Date.now() - startTime;
@@ -33,11 +33,9 @@ export default async function UserTable() {
         </div>
         <RefreshButton />
       </div>
-      
+
       {users.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          No users found
-        </div>
+        <div className="text-center py-8 text-gray-500">No users found</div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -54,7 +52,7 @@ export default async function UserTable() {
               {users.map((user) => (
                 <tr key={user.id} className="group hover:bg-white/20 transition-colors">
                   <td className="py-4">
-                    <p className="font-medium">{user.name || 'N/A'}</p>
+                    <p className="font-medium">{user.name || "N/A"}</p>
                   </td>
                   <td className="py-4">
                     <p className="text-sm text-gray-700">{user.email}</p>
@@ -70,10 +68,11 @@ export default async function UserTable() {
                   <td className="py-4">
                     {user.locations.length > 0 ? (
                       <div className="space-y-1">
-                        <p className="text-sm font-medium">{user.locations[0].name}</p>
+                        <p className="text-sm font-medium">{user.locations[0].id}</p>
                         <div className="flex items-center gap-2">
                           <p className="text-xs text-gray-500 font-mono">
-                            {user.locations[0].latitude.toFixed(4)}, {user.locations[0].longitude.toFixed(4)}
+                            {user.locations[0].latitude.toFixed(4)},{" "}
+                            {user.locations[0].longitude.toFixed(4)}
                           </p>
                           <a
                             href={`https://www.google.com/maps?q=${user.locations[0].latitude},${user.locations[0].longitude}`}
