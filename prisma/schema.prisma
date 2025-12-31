@@ -19,18 +19,31 @@ model User {
   createdAt DateTime   @default(now())
 }
 
-model Location {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  latitude    Float
-  longitude   Float
-  userId      String? @db.ObjectId
-  user        User?   @relation(fields: [userId], references: [id])
-  deviceName  String?
-  brand       String?
-  modelId     String?
-  modelName   String?
+model Device {
+  id          String  @id @default(uuid()) @map("_id")
+  // /**
+  // * Custom device name given by the user
+  // */
+  name        String?
+  deviceName  String
+  brand       String
+  modelId     String
+  modelName   String
   totalMemory Int?
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  locations Location[]
+}
+
+model Location {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  latitude  Float
+  longitude Float
+  userId    String? @db.ObjectId
+  user      User?   @relation(fields: [userId], references: [id])
+  deviceId  String? @db.ObjectId
+  device    Device? @relation(fields: [deviceId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
