@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { timeAgo } from "@/lib/utils";
 import RefreshButton from "./refresh-button";
+import { humanFileSize } from "@/src/utils/human-file-size";
 
 export default async function DeviceTable() {
   const startTime = Date.now();
@@ -67,7 +68,9 @@ export default async function DeviceTable() {
                     <p className="text-sm text-gray-700">{device.modelName || "N/A"}</p>
                   </td>
                   <td className="py-4">
-                    <p className="text-sm text-gray-700">{device.totalMemory || "N/A"}</p>
+                    <p className="text-sm text-gray-700">
+                      {device.totalMemory ? humanFileSize(device.totalMemory) : "N/A"}
+                    </p>
                   </td>
                   <td className="py-4">
                     <div className="flex items-center gap-2">
